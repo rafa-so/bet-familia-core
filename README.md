@@ -1,9 +1,10 @@
 # bet-familia-core
 
 ## Motivação
-Este projeto tem duas principais motivações:
+Este projeto tem trÊs principais motivações:
 1. Estudar de forma mais prática o que tenho visto em aula sobre `Clean Arch` e `DDD`.
 2. Além de modelar o problema todo do `zero`, é solidificar mais meus conhecimentos com `Engenharia de Requisitos`, `Engenharia de Plataforma`, e mais alguns detalhes técnicos de node.
+3. Pegar um problema real, e conversar sobre ele com pessoas reais.
 
 Para isso, pensei em resolver um "problema" que temos na família de tempos em tempos.
 
