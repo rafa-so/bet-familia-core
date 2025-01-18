@@ -12,7 +12,10 @@
 :Apostadores: -up-> (Cria Lance)
 :Admin: --> (Lista Lances)
 :Apostadores: -up-> (Lista Lances)
-:Admin: --> (Avalia Ganhador)
 :Admin: -left-> (Encerra Evento)
+(Encerra Evento) .down.> (Avalia Ganhador) : include
+:Admin: -down-> (Lista Competidores)
+:Apostadores: -up-> (Lista Competidores)
+:Admin: -left-> (Cadastra Apostadores)
 
 @enduml
