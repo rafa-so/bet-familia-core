@@ -34,6 +34,20 @@ class Bettor {
     {method} static create(name, email)
 }
 
+class User {
+    id: number
+    name: NameVO
+    email: EmailVO
+    password: string
+}
+
+class Perfil {
+    id: number
+    name: NameVO
+    isAdmin()
+    isBettor()
+}
+
 class Event {
     {field} id: number
     {field} name: NameVO
@@ -70,9 +84,15 @@ Event - Challenge
 StatusEventVO -right- Event
 Challenge - Challenger
 Challenge -down- StatusChallengeVO 
+
+
+
 Bet -up- Challenge
-Bettor -up- Bet
-EmailVO - Bettor
+Bet -down- Perfil
+Perfil -right- Challenge
+Challenger -down- Perfil
+Perfil -right- User
+Event -down- Perfil
 
 
 @enduml
