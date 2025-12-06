@@ -1,0 +1,26 @@
+{
+  "name": "bet-familia-monorepo",
+  "version": "1.0.0",
+  "description": "Bet para apostar nos jogos da copa com a familia",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafa-so/bet-familia-core.git"
+  },
+  "author": "Rafael Oliveira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafa-so/bet-familia-core/issues"
+  },
+  "homepage": "https://github.com/rafa-so/bet-familia-core#readme",
+    "workspaces": [
+        "packages/backend",
+        "packages/frontend"
+    ]
+}
