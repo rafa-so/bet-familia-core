@@ -19,8 +19,8 @@
     "url": "https://github.com/rafa-so/bet-familia-core/issues"
   },
   "homepage": "https://github.com/rafa-so/bet-familia-core#readme",
-    "workspaces": [
-        "packages/backend",
-        "packages/frontend"
-    ]
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend"
+  ]
 }
