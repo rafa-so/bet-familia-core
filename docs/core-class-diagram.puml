@@ -1,0 +1,98 @@
+@startuml core-class-diagram
+
+class NameVO {
+    {field} value: string
+    {method} static create(value)
+    {method} getValue
+}
+
+class EmailVO {
+    {field} value: string
+    {method} static create(value)
+    {method} getValue
+}
+
+class StatusEventVO {
+    {field} value: string
+    {method} created()
+    {method} initialized()
+    {method} finished()
+}
+
+class StatusChallengeVO {
+    {field} value: string
+    {method} created()
+    {method} initialized()
+    {method} finished()
+    {method} scoreVerificaded()
+}
+
+class Bettor {
+    {field} id: number
+    {field} name: NameVO
+    {field} email: EmailVO
+    {method} static create(name, email)
+}
+
+class User {
+    id: number
+    name: NameVO
+    email: EmailVO
+    password: string
+}
+
+class Perfil {
+    id: number
+    name: NameVO
+    isAdmin()
+    isBettor()
+}
+
+class Event {
+    {field} id: number
+    {field} name: NameVO
+    {field} start_at: date
+    {field} finished_at: date
+    {field} status: StatusEventVO
+    {method} static create(name, start_at, finished_at)
+    {method} isFinished()
+    {method} init()
+}
+
+class Challenge {
+    {field} id: number
+    {field} name: NameVO
+    {field} status StatusChallengeVO
+    {method} static create(name)
+}
+
+class Challenger {
+    {field} id: number
+    {field} name: NameVO
+    {method} static create(name)
+}
+
+class Bet {
+    {field} id: number
+    {field} content: string
+}
+
+NameVO -down- Event
+NameVO -down- Challenge
+NameVO -down- Challenger
+Event - Challenge
+StatusEventVO -right- Event
+Challenge - Challenger
+Challenge -down- StatusChallengeVO 
+
+
+
+Bet -up- Challenge
+Bet -down- Perfil
+Perfil -right- Challenge
+Challenger -down- Perfil
+Perfil -right- User
+Event -down- Perfil
+
+
+@enduml

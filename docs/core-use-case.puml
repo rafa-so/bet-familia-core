@@ -1,0 +1,21 @@
+@startuml core-use-case
+
+:Admin:
+:Apostadores:
+
+:Admin: -up-> (Cria Evento)
+:Admin: -up-> (Cria Disputas)
+:Admin: -right-> (Cria Competidores)
+:Admin: -right-> (Inicia Evento)
+:Admin: -up-> (Inicia Disputa)
+:Admin: --> (Cria Lance)
+:Apostadores: -up-> (Cria Lance)
+:Admin: --> (Lista Lances)
+:Apostadores: -up-> (Lista Lances)
+:Admin: -left-> (Encerra Evento)
+(Encerra Evento) .down.> (Avalia Ganhador) : include
+:Admin: -down-> (Lista Competidores)
+:Apostadores: -up-> (Lista Competidores)
+:Admin: -left-> (Cadastra Apostadores)
+
+@enduml
