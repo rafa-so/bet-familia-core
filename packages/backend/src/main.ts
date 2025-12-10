@@ -1,10 +1,20 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import express, { Request, Response } from "express";
+import cors from "cors";
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  console.log('Server running on port', process.env.PORT ?? 3000);
-  await app.listen(process.env.PORT ?? 3000);
-}
-bootstrap();
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req: Request, res: Response) => {
+  res.send({ response: "Hello, World!"});
+});
+
+app.post("/challenges", (req: Request, res: Response) => {
+  const receivedData = req.body;
+  res.send({ receivedData });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
