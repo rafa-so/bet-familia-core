@@ -1,0 +1,56 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype ortho
+
+title Schema do Banco de Dados - App Bet Família
+
+entity "User" as user {
+  * id : uuid <<PK>>
+  --
+  name : varchar
+  email : varchar <<Unique>>
+  avatar_url : varchar
+  total_points : integer (default 0)
+  created_at : timestamp
+}
+
+entity "Tournament" as tournament {
+  * id : uuid <<PK>>
+  --
+  name : varchar
+  slug : varchar <<Unique>>
+  status : enum (PREPARING, ACTIVE, FINISHED)
+  config : jsonb (regras de pontuação: {exact: 3, winner: 1})
+  created_at : timestamp
+}
+
+entity "Match" as match {
+  * id : uuid <<PK>>
+  --
+  * tournament_id : uuid <<FK>>
+  team_home : varchar
+  team_away : varchar
+  start_at : timestamp
+  home_score : integer (nullable)
+  away_score : integer (nullable)
+  status : enum (SCHEDULED, IN_PROGRESS, FINISHED)
+}
+
+entity "Bet" as bet {
+  * id : uuid <<PK>>
+  --
+  * user_id : uuid <<FK>>
+  * match_id : uuid <<FK>>
+  bet_home_score : integer
+  bet_away_score : integer
+  points_earned : integer (nullable)
+  created_at : timestamp
+}
+
+' Relacionamentos
+tournament ||--o{ match : "contém"
+match ||--o{ bet : "recebe"
+user ||--o{ bet : "faz"
+
+@enduml
