@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  plantuml:
+    image: plantuml/plantuml-server:jetty-v1.2024.3
+    container_name: plantuml-server
+    ports:
+      - "${PLANTUML_PORT:-8080}:8080"
+    environment:
+      - PLANTUML_LIMIT_SIZE=${PLANTUML_LIMIT_SIZE:-4096}
+      - BASE_URL=plantuml
+      - ALLOW_PLANTUML_INCLUDE=true
+    volumes:
+      - ./docs:/app/docs:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

@@ -1,28 +1,24 @@
-@startuml
+' filepath: /home/rafa-so/workspace/pessoal/bet-familia-core/docs/core-schema.puml
+@startuml "schema bet familia"
+
 !theme plain
 hide circle
 skinparam linetype ortho
-
-title Schema do Banco de Dados - App Bet Família
 
 entity "User" as user {
   * id : uuid <<PK>>
   --
   name : varchar
-  email : varchar <<Unique>>
-  avatar_url : varchar
-  total_points : integer (default 0)
-  created_at : timestamp
+  email : varchar <<Nullable>>
+  is_managed : boolean (default false)
+  total_points : integer
 }
 
 entity "Tournament" as tournament {
   * id : uuid <<PK>>
   --
   name : varchar
-  slug : varchar <<Unique>>
-  status : enum (PREPARING, ACTIVE, FINISHED)
-  config : jsonb (regras de pontuação: {exact: 3, winner: 1})
-  created_at : timestamp
+  config : jsonb
 }
 
 entity "Match" as match {
@@ -32,25 +28,25 @@ entity "Match" as match {
   team_home : varchar
   team_away : varchar
   start_at : timestamp
-  home_score : integer (nullable)
-  away_score : integer (nullable)
-  status : enum (SCHEDULED, IN_PROGRESS, FINISHED)
+  home_score : integer
+  away_score : integer
+  status : enum
 }
 
 entity "Bet" as bet {
   * id : uuid <<PK>>
   --
-  * user_id : uuid <<FK>>
+  * user_id : uuid <<FK>> (Dono da aposta)
+  * created_by_id : uuid <<FK>> (Quem digitou)
   * match_id : uuid <<FK>>
   bet_home_score : integer
   bet_away_score : integer
-  points_earned : integer (nullable)
-  created_at : timestamp
+  points_earned : integer
 }
 
-' Relacionamentos
+user ||--o{ bet : "ganha pontos"
+user ||--o{ bet : "registra"
 tournament ||--o{ match : "contém"
 match ||--o{ bet : "recebe"
-user ||--o{ bet : "faz"
 
 @enduml
